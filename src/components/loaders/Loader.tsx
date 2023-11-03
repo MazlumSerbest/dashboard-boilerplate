@@ -13,7 +13,7 @@ export function MainLoader() {
     return (
         <div className="flex animate-pulse w-screen h-screen items-center justify-center">
             <Image
-                src="/images/vercel.png"
+                src="/images/vercel.svg"
                 width={120}
                 height={50}
                 alt="Company"
