@@ -40,7 +40,7 @@ export default function NavLayout() {
                     onClick={() => setShowSidebar(true)}
                     onTouchEnd={() => setShowSidebar(true)}
                 >
-                    <BiMenu className="text-2xl text-zinc-500" />
+                    <BiMenu className="text-3xl text-zinc-500" />
                 </Button>
                 <span className="flex-1" />
                 <Logo width={32} height={36} />
