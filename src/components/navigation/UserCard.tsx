@@ -45,7 +45,7 @@ export default function UserCard() {
                     >
                         <PopoverTrigger>
                             <Button isIconOnly variant="light" className="p-1 pl-0">
-                                <BiLogOut className="text-3xl text-zinc-400" />
+                                <BiLogOut className="text-2xl text-zinc-500" />
                             </Button>
                         </PopoverTrigger>
                         <PopoverContent className="flex flex-col gap-2 p-3">
