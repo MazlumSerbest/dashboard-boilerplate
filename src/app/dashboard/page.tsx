@@ -10,7 +10,7 @@ export default function Dashboard() {
                     <h1 className="font-bold text-7xl text-zinc-500">20</h1>
                 }
                 icon={
-                    <BiDesktop className="text-5xl md:text-6xl text-zinc-400/50" />
+                    <BiDesktop className="text-5xl md:text-6xl text-indigo-400/50" />
                 }
             />
             <PanelCard
@@ -19,7 +19,7 @@ export default function Dashboard() {
                     <h1 className="font-bold text-7xl text-zinc-500">150</h1>
                 }
                 icon={
-                    <BiShield className="text-5xl md:text-6xl text-zinc-400/50" />
+                    <BiShield className="text-5xl md:text-6xl text-indigo-400/50" />
                 }
             />
             <PanelCard
@@ -28,7 +28,7 @@ export default function Dashboard() {
                     <h1 className="font-bold text-7xl text-zinc-500">58</h1>
                 }
                 icon={
-                    <BiData className="text-5xl md:text-6xl text-zinc-400/50" />
+                    <BiData className="text-5xl md:text-6xl text-indigo-400/50" />
                 }
             />
         </div>

@@ -73,7 +73,7 @@ export default function NavLayout() {
                                     className={
                                         "font-semibold" +
                                         (withoutLocale == p.path
-                                            ? " bg-zinc-100"
+                                            ? " bg-indigo-100"
                                             : "")
                                     }
                                 >

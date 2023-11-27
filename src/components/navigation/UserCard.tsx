@@ -26,12 +26,12 @@ export default function UserCard() {
                     <Avatar
                         icon={<AvatarIcon />}
                         classNames={{
-                            base: "bg-zinc-200",
-                            icon: "text-zinc-400",
+                            base: "bg-indigo-200",
+                            icon: "text-indigo-400",
                         }}
                     />
                     <div className="flex-1 min-w-0">
-                        <p className="truncate text-sm font-bold text-zinc-500">
+                        <p className="truncate text-sm font-bold text-indigo-500">
                             {session?.user?.name}
                         </p>
                         <p className="truncate text-xs text-zinc-500">
@@ -49,7 +49,7 @@ export default function UserCard() {
                             </Button>
                         </PopoverTrigger>
                         <PopoverContent className="flex flex-col gap-2 p-3">
-                            <h2 className="text-lg font-semibold text-zinc-600">
+                            <h2 className="text-lg font-semibold text-indigo-600">
                                 {/* {t("logout")} */}
                                 Log out
                             </h2>
