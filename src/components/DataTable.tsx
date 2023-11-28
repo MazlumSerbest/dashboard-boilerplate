@@ -77,8 +77,11 @@ export default function DataTable(props: Props) {
         let filteredItems = [...data];
 
         if (hasSearchFilter) {
-            filteredItems = filteredItems.filter((item) =>
-                item.name.toLowerCase().includes(filterValue.toLowerCase()),
+            filteredItems = filteredItems.filter((fitem) => {
+                debugger;
+                const filterColumns = columns.filter(e=> e.searchable);
+                return filterColumns.some(e=> fitem[e.key]?.toLowerCase().includes(filterValue.toLowerCase()));
+            }
             );
         }
         if (
@@ -99,6 +102,7 @@ export default function DataTable(props: Props) {
         data,
         filterValue,
         activeFilter,
+        columns
     ]);
 
     const items = React.useMemo(() => {

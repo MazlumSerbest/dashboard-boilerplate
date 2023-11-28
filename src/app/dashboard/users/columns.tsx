@@ -2,8 +2,8 @@ import { faker } from "@faker-js/faker"
 
 export const columns = [
   {name: "ID", key: "id", sortable: true},
-  {name: "Name", key: "name", sortable: true},
-  {name: "Role", key: "role", sortable: true},
+  {name: "Name", key: "name", sortable: true, searchable: true},
+  {name: "Role", key: "role", sortable: true, searchable: true},
   {name: "Email", key: "email"},
   {name: "Active", key: "active", sortable: true},
   {name: "Actions", key: "actions"},
