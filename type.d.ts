@@ -13,10 +13,11 @@ type Path = {
     icon: React.ReactNode;
 };
 
-//#region Table Component Types
+//#region DataTable Component Types
 type Column = {
     name: string;
     key: string;
+    width?: number;
     sortable?: boolean;
     searchable?: boolean;
 };
