@@ -78,8 +78,8 @@ export default function DataTable(props: Props) {
 
         if (hasSearchFilter) {
             filteredItems = filteredItems.filter((fitem) => {
-                debugger;
                 const filterColumns = columns.filter(e=> e.searchable);
+                
                 return filterColumns.some(e=> fitem[e.key]?.toLowerCase().includes(filterValue.toLowerCase()));
             }
             );
@@ -305,7 +305,7 @@ export default function DataTable(props: Props) {
             className={className ?? ""}
             topContent={topContent}
             topContentPlacement="outside"
-            bottomContent={data.length ? bottomContent : <></>}
+            bottomContent={data.length > rowsPerPage ? bottomContent : <></>}
             bottomContentPlacement="outside"
             // checkboxesProps={{
             //     classNames: {
