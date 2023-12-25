@@ -13,6 +13,11 @@ type Path = {
     icon: React.ReactNode;
 };
 
+type ListBoxItem = {
+    id: number;
+    name: string;
+};
+
 //#region DataTable Component Types
 type Column = {
     name: string;
