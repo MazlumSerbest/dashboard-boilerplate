@@ -19,6 +19,7 @@ import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { Pagination } from "@nextui-org/pagination";
 import { BiPlus, BiSearch, BiChevronDown } from "react-icons/bi";
+import Loader from "./loaders/Loader";
 
 type Props = {
     columns: Column[];
@@ -58,14 +59,16 @@ export default function DataTable(props: Props) {
         new Set(props.initialVisibleColumNames),
     );
     const [activeFilter, setActiveFilter] = React.useState<Selection>("all");
-    const [rowsPerPage, setRowsPerPage] = React.useState<number>(defaultRowsPerPage || 10);
+    const [rowsPerPage, setRowsPerPage] = React.useState<number>(
+        defaultRowsPerPage || 10,
+    );
     const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
         column: props.sortOption.column,
         direction: props.sortOption.direction,
     });
     const [page, setPage] = React.useState(1);
 
-    const pages = Math.ceil(data.length / rowsPerPage);
+    // const pages = Math.ceil(data.length / rowsPerPage);
 
     const hasSearchFilter = Boolean(filterValue);
 
@@ -112,22 +115,34 @@ export default function DataTable(props: Props) {
         columns,
     ]);
 
-    const items = React.useMemo(() => {
+    // const items = React.useMemo(() => {
+    const pages = Math.ceil(filteredItems.length / rowsPerPage);
+
+    const sortedItems = React.useMemo(() => {
         const start = (page - 1) * rowsPerPage;
         const end = start + rowsPerPage;
 
-        return filteredItems.slice(start, end);
-    }, [page, filteredItems, rowsPerPage]);
+        //     return filteredItems.slice(start, end);
+        // }, [page, filteredItems, rowsPerPage]);
 
-    const sortedItems = React.useMemo(() => {
-        return [...items].sort((a: DataType, b: DataType) => {
-            const first = a[sortDescriptor.column as keyof DataType] as number;
-            const second = b[sortDescriptor.column as keyof DataType] as number;
-            const cmp = first < second ? -1 : first > second ? 1 : 0;
+        // const sortedItems = React.useMemo(() => {
+        //     return [...items].sort((a: DataType, b: DataType) => {
+        return [...filteredItems]
+            .sort((a: DataType, b: DataType) => {
+                const first = a[
+                    sortDescriptor.column as keyof DataType
+                ] as number;
+                const second = b[
+                    sortDescriptor.column as keyof DataType
+                ] as number;
+                const cmp = first < second ? -1 : first > second ? 1 : 0;
 
-            return sortDescriptor.direction === "descending" ? -cmp : cmp;
-        });
-    }, [sortDescriptor, items]);
+                return sortDescriptor.direction === "descending" ? -cmp : cmp;
+                // });
+                // }, [sortDescriptor, items]);
+            })
+            .slice(start, end);
+    }, [sortDescriptor, page, filteredItems, rowsPerPage]);
 
     const onRowsPerPageChange = React.useCallback(
         (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -160,7 +175,7 @@ export default function DataTable(props: Props) {
                             clearButton: "text-xl text-zinc-500",
                             input: "placeholder:italic placeholder:text-zinc-400",
                         }}
-                        placeholder="Search"
+                        placeholder="Arama Yap..."
                         size="sm"
                         startContent={
                             <BiSearch className="text-2xl text-zinc-300" />
@@ -181,7 +196,7 @@ export default function DataTable(props: Props) {
                                         size="sm"
                                         variant="flat"
                                     >
-                                        Active
+                                        Aktif
                                     </Button>
                                 </DropdownTrigger>
                                 <DropdownMenu
@@ -214,7 +229,7 @@ export default function DataTable(props: Props) {
                                     size="sm"
                                     variant="flat"
                                 >
-                                    Columns
+                                    Kolonlar
                                 </Button>
                             </DropdownTrigger>
                             <DropdownMenu
@@ -243,7 +258,7 @@ export default function DataTable(props: Props) {
                                 size="sm"
                                 onPress={onAddNew}
                             >
-                                Add New
+                                Ekle
                             </Button>
                         ) : (
                             <></>
@@ -252,21 +267,30 @@ export default function DataTable(props: Props) {
                 </div>
                 <div className="flex justify-between items-center">
                     <span className="text-zinc-400 text-sm">
-                        Total rows: {data.length}
+                        Toplam satır: {data.length}
                     </span>
                     <label className="flex items-center text-zinc-400 text-sm">
-                        Rows per page:
+                        Sayfa satır sayısı:
                         <select
                             className="bg-transparent outline-none text-zinc-400 text-sm ml-2"
                             onChange={onRowsPerPageChange}
                         >
-                            <option value="10" selected={defaultRowsPerPage == 10}>
+                            <option
+                                value="10"
+                                selected={defaultRowsPerPage == 10}
+                            >
                                 10
                             </option>
-                            <option value="20" selected={defaultRowsPerPage == 20}>
+                            <option
+                                value="20"
+                                selected={defaultRowsPerPage == 20}
+                            >
                                 20
                             </option>
-                            <option value="50" selected={defaultRowsPerPage == 50}>
+                            <option
+                                value="50"
+                                selected={defaultRowsPerPage == 50}
+                            >
                                 50
                             </option>
                         </select>
@@ -347,7 +371,11 @@ export default function DataTable(props: Props) {
                     </TableColumn>
                 )}
             </TableHeader>
-            <TableBody emptyContent={emptyContent} items={sortedItems}>
+            <TableBody
+                emptyContent={emptyContent}
+                items={sortedItems}
+                loadingContent={<Loader />}
+            >
                 {(item) => (
                     <TableRow
                         key={item.id}
