@@ -49,38 +49,48 @@ export default function AutoComplete(props: Props) {
                     afterLeave={() => setQuery("")}
                 >
                     <Combobox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-zinc/5 focus:outline-none sm:text-sm">
-                        {(!data.length || (filteredData?.length === 0 && query !== "")) ? (
+                        {!data.length ||
+                        (filteredData?.length === 0 && query !== "") ? (
                             <div className="relative cursor-default select-none px-4 py-2 text-zinc-700">
                                 Herhangi bir kayıt bulunamadı.
                             </div>
                         ) : (
-                            filteredData?.map((item: ListBoxItem) => (
+                            <>
                                 <Combobox.Option
-                                    key={item.id}
-                                    value={item.id}
-                                    className={({ active }) =>
-                                        `relative cursor-default select-none px-3.5 py-1 ${
-                                            active
-                                                ? "bg-indigo-600 text-white"
-                                                : "text-zinc-700"
-                                        }`
-                                    }
+                                    key="null"
+                                    value={null}
+                                    className="relative italic cursor-default select-none px-3.5 py-1"
                                 >
-                                    {({ selected }) => (
-                                        <>
-                                            <span
-                                                className={`block truncate ${
-                                                    selected
-                                                        ? "font-bold"
-                                                        : "font-normal"
-                                                }`}
-                                            >
-                                                {item.name}
-                                            </span>
-                                        </>
-                                    )}
+                                    Seçimi Temizle
                                 </Combobox.Option>
-                            ))
+                                {filteredData?.map((item: ListBoxItem) => (
+                                    <Combobox.Option
+                                        key={item.id}
+                                        value={item.id}
+                                        className={({ active }) =>
+                                            `relative cursor-default select-none px-3.5 py-1 ${
+                                                active
+                                                    ? "bg-indigo-600 text-white"
+                                                    : "text-zinc-700"
+                                            }`
+                                        }
+                                    >
+                                        {({ selected }) => (
+                                            <>
+                                                <span
+                                                    className={`block truncate ${
+                                                        selected
+                                                            ? "font-bold"
+                                                            : "font-normal"
+                                                    }`}
+                                                >
+                                                    {item.name}
+                                                </span>
+                                            </>
+                                        )}
+                                    </Combobox.Option>
+                                ))}
+                            </>
                         )}
                     </Combobox.Options>
                 </Transition>
